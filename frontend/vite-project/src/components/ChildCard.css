@@ -1,0 +1,52 @@
+.custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display:flex;
+	justify-content: space-between;
+    gap:20px;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.card-text {
+    color: #555;
+    font-size: 0.9rem;
+    
+}
+
+.card-link {
+    color: #3355ff;
+    font-size: 0.8rem;
+    
+}
+
+.card-header {
+    color: #000000;
+    font-size: 0.9rem;
+}
+
+.card-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #0056b3;
+}
