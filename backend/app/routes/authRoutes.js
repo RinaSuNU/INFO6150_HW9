@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
  * @swagger
  * tags:
  *   name: Auth
- *   description: 用户认证相关 API
+ *   description: User Auth API
  */
 
 /**
@@ -15,8 +15,8 @@ const bcrypt = require('bcryptjs');
  * /api/auth/login:
  *   post:
  *     tags: [Auth]
- *     summary: 用户登录
- *     description: 验证用户名和密码，返回登录状态
+ *     summary: user Login
+ *     description: 
  *     requestBody:
  *       required: true
  *       content:
@@ -36,7 +36,7 @@ const bcrypt = require('bcryptjs');
  *                 example: "admin!@#123"
  *     responses:
  *       200:
- *         description: 登录成功
+ *         description: login successful
  *         content:
  *           application/json:
  *             schema:
@@ -47,7 +47,7 @@ const bcrypt = require('bcryptjs');
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "登录成功"
+ *                   example: "login successful"
  *                 user:
  *                   type: object
  *                   properties:
@@ -56,25 +56,23 @@ const bcrypt = require('bcryptjs');
  *                     username:
  *                       type: string
  *       400:
- *         description: 参数错误
+ *         description: Parameter error
  *       401:
- *         description: 认证失败
+ *         description: Authentication failure
  *       500:
- *         description: 服务器错误
+ *         description: Server error
  */
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    // 1. 参数验证
     if (!username || !password) {
         return res.status(400).json({ 
             success: false, 
-            message: '需要提供用户名和密码' 
+            message: 'Username and password required' 
         });
     }
 
     try {
-        // 2. 查找用户
         const user = await User.findOne({ username }).select('+password');
         if (!user) {
             return res.status(401).json({ 
@@ -83,29 +81,27 @@ router.post('/login', async (req, res) => {
             });
         }
 
-        // 3. 验证密码
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(401).json({ 
                 success: false, 
-                message: '密码错误' 
+                message: 'Wrong password' 
             });
         }
 
-        // 4. 成功响应
         res.status(200).json({ 
             success: true,
-            message: '登录成功',
+            message: 'login successful',
             user: { 
                 id: user._id, 
                 username: user.username 
             }
         });
     } catch (err) {
-        console.error('登录错误:', err);
+        console.error('login error:', err);
         res.status(500).json({ 
             success: false, 
-            message: '服务器内部错误' 
+            message: 'Internal server error' 
         });
     }
 });
@@ -115,11 +111,11 @@ router.post('/login', async (req, res) => {
  * /api/auth/logout:
  *   post:
  *     tags: [Auth]
- *     summary: 用户登出
- *     description: 退出登录，前端只需清除 JWT 令牌
+ *     summary: Logout
+ *     description: 
  *     responses:
  *       200:
- *         description: 登出成功
+ *         description: Logout successful
  *         content:
  *           application/json:
  *             schema:
@@ -127,13 +123,13 @@ router.post('/login', async (req, res) => {
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "登出成功"
+ *                   example: "logout successful"
  */
 router.post('/logout', (req, res) => {
     res.clearCookie('token');
     res.status(200).json({ 
         success: true,
-        message: '登出成功' 
+        message: 'logout successful' 
     });
 });
 

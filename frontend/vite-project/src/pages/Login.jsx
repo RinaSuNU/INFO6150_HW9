@@ -17,7 +17,7 @@ const Login=() =>{
             const res = await axios.post('http://localhost:8000/api/auth/login', { username, password });
             
             if (res.data.success) {
-                alert('登录成功!');
+                alert('Login successful!');
                 navigate('/home'); // Redirect to home page after login
               } else {
                 alert(response.data.message);}

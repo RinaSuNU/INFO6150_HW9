@@ -8,8 +8,8 @@ const Contact = () => {
       
       <div className="contact-info">
         <h2>Get in Touch</h2>
-        <p>Email: info@jobconnect.example.com</p>
-        <p>Phone: +1 (555) 123-4567</p>
+        <a href="mailto:info@jobconnect.example.com">Email: info@jobconnect.example.com</a><br />
+        <a href="tel:+15551234567">Phone: +1 (555) 123-4567</a>
         <p>Address: 123 Career Lane, Tech City, TC 10101</p>
       </div>
 

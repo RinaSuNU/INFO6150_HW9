@@ -16,10 +16,10 @@ const dbOptions = {
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
   socketTimeoutMS: 45000,
-  maxPoolSize: 10,  // 正确的参数名是 maxPoolSize 而不是 poolsize
-  minPoolSize: 2,   // 可选：设置最小连接数
-  maxIdleTimeMS: 30000, // 连接空闲超时
-  waitQueueTimeoutMS: 10000 // 等待连接超时
+  maxPoolSize: 10,  
+  minPoolSize: 2,   
+  maxIdleTimeMS: 30000, 
+  waitQueueTimeoutMS: 10000 
 };
 
 mongoose.connect('mongodb://127.0.0.1:27017/userdb', dbOptions)

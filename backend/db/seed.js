@@ -14,7 +14,6 @@ const seedDatabase = async () => {
       Company.deleteMany({ _id: { $exists: true }})
     ]);
 
-    const salt = await bcrypt.genSalt(10);
     const users = await User.create([
       {
         username: "admin",
